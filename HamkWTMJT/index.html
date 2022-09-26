@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="HAMK AMKoodari Web-tekniikoiden perusteet tehtävä 5">
+        <meta name="author" content="Markku Taalikka">
+        <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Tsushiman nähtävyydet - minigalleria</title>
+    </head>
+
+    <body>
+
+        <header>
+            <h1>Kuvamatka Tsushiman halki</h1>
+            <h2>Galleriasivusto Ghost of Tsushiman upeista maisemista!</h2>
+        </header>
+                
+        <main>
+
+            <div class="intro">
+            <img id="mainpic" src="img/GhostofTsushima_20201226141818.jpg" alt="Matkan alkumetreillä"><br>
+            
+                <div class="introtext">
+                    <p>Ghost of Tsushima on PS4/PS4 Pro ja PS5 peli (lyhyt mielipide alla), joka sijoittuu Japaniin Tsushiman saarelle vuonna 1275.
+                    Päähenkilö Jin Sakai on samurai, joka vaeltaa ja ratsastaa upeiden maisemien keskellä puolustaen saarta mongolien hyökkäykseltä. 
+                    <br><br>Tälle simppelille sivustolle on koottu kuvankaappauksia ontuvilla kuvateksteillä Jinin matkan varrelta keskittyen näköaloihin.</p>            
+                </div>            
+            
+                <div class="opinionbox">                    
+                    <h2>Mielipide pelistä</h2>
+                    <p>Ghost of Tsushima on kokonaisuus huomioon ottaen hyvin toteutettu toimintaseikkailupeli. Tunnelma on onnistuttu saamaan sopivan aasialaiseksi ja onneksi myös ääninäyttely on valittavissa japaniksi englannin ohella.
+                        <br>Taistelu on suunniteltu monipuoliseksi mahdollistaen erilaiset pelityylit ja niiden sekoituksen. Myös vaikeusaste on todella hyvin säädettävissä ääripäästä toiseen. 
+                        <br>Graafinen ulkoasu on mahtava ottaen huomioon PS4/PS4 Pro konsolien tehot ja latausajat ovat lähes olemattomat. 
+                        Muut kehittäjät saisivat ottaa koodauksesta mallia. 
+                        <br>Äänimaailma ei räjäytä tajuntaa ollen kuitenkin riittävä.
+                        <br>Tarina, hahmot ja näyttelijät hoitavat hommansa hyvin vaikkakin ilman suurempia yllätyksiä.
+                        <br>Avoin pelimaailma on myöskin todella täynnä suhteellisen mielekästä tehtävää toistaen kyllä monesti itseään.
+                        <br><br>Toiminta sekä seikkailupeleistä pitävälle suosituksen arvoinen varsinkin jos edes vähän tykkää japanilaisesta fiiliksestä ja samuraista.
+                    </p>
+                </div>
+                
+                <div class="plusandminus">
+                    <h2>Plussat ja Miinukset</h2>
+                    <div class="ListPlus">
+                        <ul>
+                            <li>Japanilainen tunnelma ja samurait!</li>
+                            <li>Upeat grafiikat ja ympäristön suunnittelu</li>
+                            <li>Ääninäyttely myös japaniksi</li>
+                            <li>Tekstitys suomeksi jos englanti ei väänny</li>
+                            <li>Pelattavuus kohdillaan ja taistelut mielekkäitä</li>
+                            <li>Ilmainen ja yllättävän laadukas erillinen co-op pelitila</li>
+                            <li>Latausajat todella nopeat</li>
+                        </ul>
+                    </div>
+                    <div class="ListMinus">
+                        <ul>
+                            <li>Ei isoja kaupunkeja vierailtavaksi</li>
+                            <li>Avoimessa maailmassa ehkä liikaakin tekemistä?</li>
+                            <li>Tehtävät ja toiminta toistavat itseään useasti</li>
+                            <li>Hevosta ja sen ulkoasua ei paljon voi customoida</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="galleryintro">
+                <h2>Galleria</h2>
+                <p>Klikkaa kuvaa ja se avautuu sivun alaosaan suurempana. Tallenna klikkaamalla hiiren oikealla napilla ja valitsemalla "Tallenna kuva...".</p>
+            </div>
+            
+            <!-- Galleriassa on käytetty pohjana https://www.w3schools.com/howto/howto_js_tab_img_gallery.asp , jota on muokattu sivustolle sopivammaksi. -->
+
+            <div class="gallery">
+                <div class="picture">
+                <img src="img/GhostofTsushima_20201226221949.jpg" alt="Korkealla mahtavat näkymät" onclick="myFunction(this);">
+                </div>
+                <div class="picture">
+                <img src="img/GhostofTsushima_20201228145455.jpg" alt="Kukkien loisteessa" onclick="myFunction(this);">
+                </div>
+                <div class="picture">
+                <img src="img/GhostofTsushima_20201226212717.jpg" alt="Tuulinen yö" onclick="myFunction(this);">
+                </div>
+                <div class="picture">
+                <img src="img/GhostofTsushima_20201230225036.jpg" alt="Tauon paikka" onclick="myFunction(this);">
+                </div>
+                <div class="picture">
+                <img src="img/GhostofTsushima_20201226181900.jpg" alt="Kylvyn aika" onclick="myFunction(this);">
+                </div>
+                <div class="picture">
+                <img src="img/GhostofTsushima_20201227153759.jpg" alt="Istahdus kalliolla" onclick="myFunction(this);">
+                </div>
+                <div class="picture">
+                <img src="img/GhostofTsushima_20201228113122.jpg" alt="Savua horisontissa" onclick="myFunction(this);">
+                </div>
+                <div class="picture">
+                <img src="img/GhostofTsushima_20201228235024.jpg" alt="Häikäisevä päivä" onclick="myFunction(this);">
+                </div>
+                <div class="picture">
+                <img src="img/GhostofTsushima_20201228210914.jpg" alt="Alttaria tutkimassa" onclick="myFunction(this);">
+                </div>
+                <div class="picture">
+                <img src="img/GhostofTsushima_20201230234815.jpg" alt="Punaiset kukat yössä" onclick="myFunction(this);">
+                </div>
+                <div class="picture">
+                <img src="img/GhostofTsushima_20201228205705.jpg" alt="Auringonlaskun aika" onclick="myFunction(this);">
+                </div>
+                <div class="picture">
+                <img src="img/GhostofTsushima_20201231210019.jpg" alt="Merinäköala kalliolta" onclick="myFunction(this);">
+                </div>
+                <div class="picture">
+                <img src="img/GhostofTsushima_20210114193509.jpg" alt="Merta horisontissa" onclick="myFunction(this);">
+                </div>
+                <div class="picture">
+                <img src="img/GhostofTsushima_20201230204711.jpg" alt="Matkantekijä ja uskollinen ystävä" onclick="myFunction(this);">
+                </div>
+                <div class="picture">
+                <img src="img/GhostofTsushima_20201227171147.jpg" alt="Ilta tulossa" onclick="myFunction(this);">
+                </div>
+                <div class="picture">
+                <img src="img/GhostofTsushima_20201226174348.jpg" alt="Ryöstäjän kohtalo" onclick="myFunction(this);">
+                </div>
+            </div>            
+            <!-- The expanding image container -->
+            <div class="container">
+                <!-- Close the image -->
+                <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>            
+                <!-- Expanded image -->
+                <img id="expandedImg" src="#" alt="Valittu kuva suurempana" style="width:100%">            
+                <!-- Image text -->
+                <div id="imgtext"></div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Sivuston nikkaroi Web-tekniikoiden perusteita (HAMK) varten: Markku Taalikka<br>
+            Apuna käytettiin kurssin mainioita materiaaleja, W3Schoolsia ja Googlea<br>Copyrightit kuvista ym. vissiin Sonylle ja Sucker Punch Studiosille :)<br>
+            </p>
+        </footer>
+
+        <script>
+            function myFunction(imgs) {
+              var expandImg = document.getElementById("expandedImg");
+              var imgText = document.getElementById("imgtext");
+              expandImg.src = imgs.src;
+              imgText.innerHTML = imgs.alt;
+              expandImg.parentElement.style.display = "block";
+            }
+        </script>
+
+    </body>
+</html>

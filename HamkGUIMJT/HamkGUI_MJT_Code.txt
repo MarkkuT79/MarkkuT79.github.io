@@ -1,0 +1,468 @@
+
+by Markku Taalikka
+(used some parts of the code from teaching examples, read/write methods)
+
+Hinnat.java
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JRadioButton;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Toolkit;
+
+public class Hinnat extends JFrame {
+
+	private JPanel contentPane;
+	private JButton btnAvaaMainostaulu;
+	private Mainostaulu mainostaulu = new Mainostaulu();
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JTextField textFieldUusiHinta;
+	private JLabel lblNewLabel_2;
+	private JTextField textFieldMainosTeksti;
+	private JLabel lblNewLabel_3;
+	private JButton btnAsetaMainosteksti;
+	private JButton btnAsetaUusiHinta;
+	private JLabel lblNewLabel_4;
+	private JLabel lblNewLabel_5;
+	private JRadioButton rdbtn98E;
+	private JRadioButton rdbtn95E;
+	private JRadioButton rdbtnDiesel;	
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Hinnat frame = new Hinnat();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Hinnat() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Hinnat.class.getResource("/img/gas.png")));
+		setTitle("Hintojen ja mainostaulun hallinta");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 477, 530);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.ORANGE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		btnAvaaMainostaulu = new JButton("Avaa/Päivitä mainostaulu");
+		btnAvaaMainostaulu.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnAvaaMainostaulu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainostaulu.dispose();
+				mainostaulu = new Mainostaulu();
+				mainostaulu.setVisible(true);
+			}
+		});
+		btnAvaaMainostaulu.setBounds(102, 426, 247, 37);
+		contentPane.add(btnAvaaMainostaulu);
+		
+		lblNewLabel = new JLabel("BENSA-ASEMA");  // otsikko label
+		lblNewLabel.setForeground(Color.RED);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(113, 11, 216, 44);
+		contentPane.add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("HINNAT");  // alaotsikko label
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(150, 56, 132, 23);
+		contentPane.add(lblNewLabel_1);
+		
+		textFieldUusiHinta = new JTextField();  // tekstikenttä johon syötetään uusi hinta
+		textFieldUusiHinta.setToolTipText("Syötä muodossa 1.234");
+		textFieldUusiHinta.setBounds(152, 247, 96, 23);
+		contentPane.add(textFieldUusiHinta);
+		textFieldUusiHinta.setColumns(10);
+		
+		lblNewLabel_2 = new JLabel("MAINOSTAULU");  // alaotsikko label
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setBounds(150, 297, 132, 44);
+		contentPane.add(lblNewLabel_2);
+		
+		textFieldMainosTeksti = new JTextField();  // tekstikenttä johon syötetään uusi mainosteksti
+		textFieldMainosTeksti.setToolTipText("Tarkista tekstin oikein näkyvyys mainostaulusta. Pituus max 40 merkkiä.");
+		textFieldMainosTeksti.setBounds(83, 384, 221, 23);
+		contentPane.add(textFieldMainosTeksti);
+		textFieldMainosTeksti.setColumns(10);
+		
+		lblNewLabel_3 = new JLabel("Syötä mainosteksti ja paina OK");  // ohjelabel
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3.setBounds(124, 352, 216, 23);
+		contentPane.add(lblNewLabel_3);
+		
+		btnAsetaMainosteksti = new JButton("OK");  // uuden mainostekstin asetus
+		btnAsetaMainosteksti.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnAsetaMainosteksti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String uusiMainos = textFieldMainosTeksti.getText();
+				if (uusiMainos.length() < 41) {				// tarkistetaan tekstin pituus ja annetaan vinkkejä käyttäjälle
+					try {
+					tallennaMainostekstiTiedostoon(textFieldMainosTeksti.getText(), filenameMainosteksti);
+					JOptionPane.showMessageDialog(null, "Uusi mainosteksti asetettu");
+					}					
+					catch (Exception e2) {
+						JOptionPane.showMessageDialog(null, "Virheellinen syöte!");								
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Teksti on liian pitkä. Max 40 merkkiä.");					
+				}
+			}
+		});
+		btnAsetaMainosteksti.setBounds(313, 384, 60, 23);
+		contentPane.add(btnAsetaMainosteksti);
+		
+		btnAsetaUusiHinta = new JButton("OK");  // uuden hinnan asetus
+		btnAsetaUusiHinta.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnAsetaUusiHinta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String uusiHinta = textFieldUusiHinta.getText();				
+				if (uusiHinta.length() == 5) {				// tarkistetaan hinnan merkkien määrä ja annetaan vinkkejä käyttäjälle jos eri
+					try {						
+						float float_uusiHinta = Float.parseFloat(uusiHinta);	// tarkistetaan että syöte on numeroina								
+						if (rdbtn98E.isSelected()) {		// tarkistetaan mitä hintaa muutetaan, ilmoitetaan onnistuneesta muutoksesta
+							tallenna98EHintaTiedostoon(textFieldUusiHinta.getText(), filename98E);
+							JOptionPane.showMessageDialog(null, "Uusi hinta asetettu 98E");
+							textFieldUusiHinta.setText("");
+						}
+						else if (rdbtn95E.isSelected()) {
+							tallenna95EHintaTiedostoon(textFieldUusiHinta.getText(), filename95E);
+							JOptionPane.showMessageDialog(null, "Uusi hinta asetettu 95E");
+							textFieldUusiHinta.setText("");
+						}
+						else if (rdbtnDiesel.isSelected()) {							
+							tallennaDieselHintaTiedostoon(textFieldUusiHinta.getText(), filenameDiesel);
+							JOptionPane.showMessageDialog(null, "Uusi hinta asetettu Diesel");					
+							textFieldUusiHinta.setText("");
+						}
+						else if (!rdbtn98E.isSelected()&&!rdbtn95E.isSelected()&&!rdbtnDiesel.isSelected()) {
+							JOptionPane.showMessageDialog(null, "Valitse muokattava polttoainelaatu");
+						}	
+					} 
+					catch (Exception e2) {
+						JOptionPane.showMessageDialog(null, "Virheellinen syöte! Anna uusi hinta muodossa 1.234 ");	
+						textFieldUusiHinta.setText("");					
+					}
+				}
+				else {		// annetaan vinkkejä käyttäjälle merkkien määrästä
+					JOptionPane.showMessageDialog(null, "Virheellinen syöte! Anna uusi hinta muodossa 1.234 ");	
+					textFieldUusiHinta.setText("");	
+				}
+			}
+		});
+		btnAsetaUusiHinta.setBounds(258, 247, 60, 23);
+		contentPane.add(btnAsetaUusiHinta);
+		
+		lblNewLabel_4 = new JLabel("Syötä uusi hinta ja paina OK");  // ohjelabel
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setBounds(136, 212, 193, 23);
+		contentPane.add(lblNewLabel_4);
+		
+		lblNewLabel_5 = new JLabel("Valitse polttoainelaatu");  // ohjelabel
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_5.setBounds(131, 100, 171, 23);
+		contentPane.add(lblNewLabel_5);
+		
+		rdbtn98E = new JRadioButton("98E");
+		rdbtn98E.setFont(new Font("Verdana", Font.BOLD, 14));
+		rdbtn98E.setBounds(177, 156, 84, 23);
+		contentPane.add(rdbtn98E);
+		
+		rdbtn95E = new JRadioButton("95E");
+		rdbtn95E.setFont(new Font("Verdana", Font.BOLD, 14));
+		rdbtn95E.setBounds(177, 130, 84, 23);
+		contentPane.add(rdbtn95E);
+		
+		rdbtnDiesel = new JRadioButton("Diesel");
+		rdbtnDiesel.setFont(new Font("Verdana", Font.BOLD, 14));
+		rdbtnDiesel.setBounds(177, 182, 84, 23);
+		contentPane.add(rdbtnDiesel);
+		
+		ButtonGroup bensalaadut = new ButtonGroup();  // polttoaineen valintanapit
+        bensalaadut.add(rdbtn98E);
+        bensalaadut.add(rdbtn95E);
+        bensalaadut.add(rdbtnDiesel);
+	}	
+	
+		// alustetaan tiedostopolkuja
+	
+		String filename98E = "c:/FuelStation/fuelPrice98E.txt";
+		String filename95E = "c:/FuelStation/fuelPrice95E.txt";
+		String filenameDiesel = "c:/FuelStation/fuelPriceDiesel.txt";
+		String filenameMainosteksti = "c:/FuelStation/mainosteksti.txt";
+		
+		// metodit hintojen ja mainostekstin tallennukseen tekstitiedostoihin
+		
+	public void tallenna98EHintaTiedostoon(String txt, String filename98E) {
+		try {			
+			// Valinta false lopussa aiheuttaa sen, että ylikirjoitetaan olemassa oleva
+			FileWriter fwriter = new FileWriter(filename98E, false);
+			fwriter.write(txt);
+			fwriter.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	public void tallenna95EHintaTiedostoon(String txt, String filename95E) {
+		try {			
+			// Valinta false lopussa aiheuttaa sen, että ylikirjoitetaan olemassa oleva
+			FileWriter fwriter = new FileWriter(filename95E, false);
+			fwriter.write(txt);
+			fwriter.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	public void tallennaDieselHintaTiedostoon(String txt, String filenameDiesel) {
+		try {			
+			// Valinta false lopussa aiheuttaa sen, että ylikirjoitetaan olemassa oleva
+			FileWriter fwriter = new FileWriter(filenameDiesel, false);
+			fwriter.write(txt);
+			fwriter.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	public void tallennaMainostekstiTiedostoon(String txt, String filenameMainosteksti) {
+		try {			
+			// Valinta false lopussa aiheuttaa sen, että ylikirjoitetaan olemassa oleva
+			FileWriter fwriter = new FileWriter(filenameMainosteksti, false);
+			fwriter.write(txt);
+			fwriter.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}	
+}
+
+
+Mainostaulu.java
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JTextArea;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Insets;
+import java.awt.Toolkit;
+
+public class Mainostaulu extends JFrame {
+
+	private JLabel lblFirmanNimi;
+	private JPanel contentPane;
+	private JLabel lblDi;
+	private JLabel lble95E;
+	private JLabel lbl98E;
+	private JLabel lbl98EHinta;
+	private JLabel lbl95EHinta;
+	private JLabel lblDieselHinta;
+	private JTextArea textAreaMainosteksti;	
+	
+	// alustetaan tiedostopolkuja
+	String filename98E = "c:/FuelStation/fuelPrice98E.txt";
+	String filename95E = "c:/FuelStation/fuelPrice95E.txt";
+	String filenameDiesel = "c:/FuelStation/fuelPriceDiesel.txt";
+	String filenameMainosteksti = "c:/FuelStation/mainosteksti.txt";	
+	
+	
+	// luodaan mainostaulu, labelit ja tekstikenttä 
+	
+	public Mainostaulu() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Mainostaulu.class.getResource("/img/gas.png")));
+		setTitle("Mainostaulu");
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setBounds(100, 100, 410, 387);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.ORANGE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);		
+		
+		lblDi = new JLabel("D");
+		lblDi.setForeground(Color.WHITE);
+		lblDi.setBackground(Color.GREEN);
+		lblDi.setOpaque(true);
+		lblDi.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblDi.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDi.setBounds(46, 171, 107, 37);
+		contentPane.add(lblDi);
+		
+		lble95E = new JLabel("95E");
+		lble95E.setForeground(Color.WHITE);
+		lble95E.setBackground(Color.GREEN);
+		lble95E.setOpaque(true);
+		lble95E.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lble95E.setHorizontalAlignment(SwingConstants.CENTER);
+		lble95E.setBounds(46, 75, 107, 37);
+		contentPane.add(lble95E);
+		
+		lbl98E = new JLabel("98E");
+		lbl98E.setOpaque(true);
+		lbl98E.setForeground(Color.WHITE);
+		lbl98E.setBackground(Color.GREEN);
+		lbl98E.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lbl98E.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl98E.setBounds(46, 123, 107, 37);
+		contentPane.add(lbl98E);
+		
+		lbl98EHinta = new JLabel("New label");		
+		lbl98EHinta.setFont(new Font("Unispace", Font.BOLD, 20));
+		lbl98EHinta.setBackground(Color.BLACK);
+		lbl98EHinta.setForeground(Color.RED);
+		lbl98EHinta.setOpaque(true);
+		lbl98EHinta.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl98EHinta.setBounds(199, 123, 147, 37);
+		contentPane.add(lbl98EHinta);
+		String teksti98EL = lueTiedostosta98E(filename98E); // luetaan tiedostosta labelille sisältö
+		lbl98EHinta.setText(teksti98EL);
+		
+		lbl95EHinta = new JLabel("New label");
+		lbl95EHinta.setFont(new Font("Unispace", Font.BOLD, 20));
+		lbl95EHinta.setBackground(Color.BLACK);
+		lbl95EHinta.setForeground(Color.RED);
+		lbl95EHinta.setOpaque(true);
+		lbl95EHinta.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl95EHinta.setBounds(199, 75, 147, 37);
+		contentPane.add(lbl95EHinta);
+		String teksti95EL = lueTiedostosta95E(filename95E); // luetaan tiedostosta labelille sisältö
+		lbl95EHinta.setText(teksti95EL);
+		
+		lblDieselHinta = new JLabel("New label");
+		lblDieselHinta.setFont(new Font("Unispace", Font.BOLD, 20));
+		lblDieselHinta.setBackground(Color.BLACK);
+		lblDieselHinta.setForeground(Color.RED);
+		lblDieselHinta.setOpaque(true);
+		lblDieselHinta.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDieselHinta.setBounds(199, 171, 147, 37);
+		contentPane.add(lblDieselHinta);
+		String tekstiDieselL = lueTiedostostaDiesel(filenameDiesel); // luetaan tiedostosta labelille sisältö
+		lblDieselHinta.setText(tekstiDieselL);		
+		
+		textAreaMainosteksti = new JTextArea();
+		textAreaMainosteksti.setMargin(new Insets(2, 4, 2, 4));
+		textAreaMainosteksti.setRows(2);
+		textAreaMainosteksti.setFont(new Font("Tahoma", Font.BOLD, 30));
+		textAreaMainosteksti.setForeground(Color.RED);
+		textAreaMainosteksti.setEditable(false);
+		textAreaMainosteksti.setBackground(Color.BLACK);
+		textAreaMainosteksti.setBounds(46, 241, 300, 78);
+		textAreaMainosteksti.setWrapStyleWord(true);
+		textAreaMainosteksti.setLineWrap(true);
+		contentPane.add(textAreaMainosteksti);
+		String tekstiMainosT = lueTiedostostaMainosteksti(filenameMainosteksti); // luetaan tiedostosta tekstikentälle sisältö
+		textAreaMainosteksti.setText(tekstiMainosT);		
+		
+		lblFirmanNimi = new JLabel("Bensis");
+		lblFirmanNimi.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFirmanNimi.setFont(new Font("Unispace", Font.PLAIN, 35));
+		lblFirmanNimi.setForeground(Color.RED);
+		lblFirmanNimi.setBounds(100, 11, 180, 43);
+		contentPane.add(lblFirmanNimi);
+	}
+	
+	// metodit tiedostojen lukuun
+	
+	public String lueTiedostosta98E(String filename98E) {
+		String alltext = "";		
+		try {
+			FileReader freader = new FileReader(filename98E);
+			BufferedReader br = new BufferedReader(freader);
+			String line;
+			while ((line = br.readLine()) != null) {
+				alltext = alltext + line;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			alltext = "";
+		}		
+		return alltext;
+	}
+	
+	public String lueTiedostosta95E(String filename95E) {
+		String alltext = "";		
+		try {
+			FileReader freader = new FileReader(filename95E);
+			BufferedReader br = new BufferedReader(freader);
+			String line;
+			while ((line = br.readLine()) != null) {
+				alltext = alltext + line;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			alltext = "";
+		}		
+		return alltext;
+	}
+	
+	public String lueTiedostostaDiesel(String filenameDiesel) {
+		String alltext = "";		
+		try {
+			FileReader freader = new FileReader(filenameDiesel);
+			BufferedReader br = new BufferedReader(freader);
+			String line;
+			while ((line = br.readLine()) != null) {
+				alltext = alltext + line;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			alltext = "";
+		}		
+		return alltext;
+	}
+	
+	public String lueTiedostostaMainosteksti(String filenameMainosteksti) {
+		String alltext = "";		
+		try {
+			FileReader freader = new FileReader(filenameMainosteksti);
+			BufferedReader br = new BufferedReader(freader);
+			String line;
+			while ((line = br.readLine()) != null) {
+				alltext = alltext + line;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			alltext = "";
+		}		
+		return alltext;
+	}
+}

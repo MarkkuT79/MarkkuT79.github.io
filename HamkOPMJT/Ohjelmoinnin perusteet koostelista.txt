@@ -1,0 +1,238 @@
+
+
+by Markku Taalikka
+Viimeisien tehtävien koodit alla koosteena:
+
+
+
+LuckySeven:
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class LuckySeven {
+
+	public static void main(String[] args) {
+				
+		Scanner in = new Scanner(System.in);
+		Random random = new Random();		
+		String no = "e";
+		String answer;
+				
+		System.out.println("Lucky Seven! Tässä voi joskus voittaa!?");
+		System.out.println("Paljonko rahaa pistät riskillä menemään? Syötä summa: ");
+		int money = in.nextInt(); // pelaaja syöttää alkusumman
+		in.nextLine(); // kuluttaa jäljelle jäävän rivinvaihdon "\n" ja estää myöhemmin loopissa tuplakierroksen syntymisen
+		
+		if (money > 0)	// peli alkaa jos rahaa on enemmän kuin 0
+			{
+				do {--money;		// pelilooppi alkaa
+		
+					int randomNumber1 = random.nextInt (10)+1;	// arvotaan 3 eri satunnaista numeroa väliltä 1-10
+					int randomNumber2 = random.nextInt (10)+1;
+					int randomNumber3 = random.nextInt (10)+1;
+				
+							
+					System.out.println("Lucky Seven! Arvotaan numerot: " + " " + randomNumber1 + " " +randomNumber2 + " " +randomNumber3); // näytetään arvotut numerot
+			
+					// vertaillaan arvottuja numeroita numeroon 7 ja jaetaan palkintoja
+					if(randomNumber1 == 7 & randomNumber2 == 7 & randomNumber3 == 7) {			
+						System.out.println("Onnesi on legendaarinen sinä onnen Pekka tai Pirkko!\nSait kaikki Seiskat ja koko kasinon itsellesi!\n********\n*Voitit*\n********");
+						money = money+1000000;
+						}			
+					else if ((randomNumber1 == 7 && randomNumber2 == 7) || (randomNumber2 == 7 && randomNumber3 == 7) || (randomNumber1 == 7 && randomNumber3 == 7)) {
+						System.out.println("Onnesi on huimaava! Sait kaksi Seiskaa ja leveän hymyn sekä lompakon!\n**********\n* Voitit *\n**********");
+						money = money+10;
+						}			
+					else if (randomNumber1 == 7 || randomNumber2 == 7 || randomNumber3 == 7) {
+						System.out.println("Onnesi on kasvamassa! Sait Seiskan ja pari kolikkoa sekä taputuksen olalle!\n**********\n* Voitit *\n**********");
+						money = money+3;				
+						}
+					else {
+						System.out.println("Voihan nenä, karusti kävi! Ei Seiskan seiskaa.\n-----------\n- Hävisit -\n-----------");
+						}
+					System.out.println("Sinulla on rahaa: " + money + "\nHaluatko jatkaa onnen kanssa leikkimistä?\nJos haluat, paina Enter. Jos et, kirjoita e ja paina Enter.");
+					
+					answer = in.nextLine(); // pelin jatkaminen tai lopettaminen vastauksen mukaan 
+											// tähän olisi voinut käyttää in.next(); niin ei olisi tullut tuplakierrosta (aluksi laitoin niin vahingossa ja toimi hyvin :) ) 		
+											// mutta ilmeisesti se on "huonoa" koodia, joten ylhäällä in.nextLine(); tuplapelin välttämiseksi Apua-ohjelmointiin neuvojen mukaan
+					if(answer.equalsIgnoreCase(no)) {
+						break;		// pelilooppi katkaistaan pelaajan pyynnöstä
+						} 
+										
+					} while (money > 0); // jatketaan peliä jos pelaaja haluaa ja rahaa on jäljellä
+			}
+		System.out.println("Kiitos pelaamisesta! Tervetuloa uudestaan!"); // elämä jatkuu :)
+	}
+}
+
+
+Arvauspeli:
+
+
+import java.util.Scanner;
+
+public class Arvauspeli {
+
+	public static void main(String[] args) {
+				
+		Scanner in = new Scanner(System.in);
+		String name = "Jantteri"; // arvattava nimi
+		String gameover = "Loppu";
+		String answer;
+		int i = 0; //aloitetaan arvauskerrat nollasta
+		
+		System.out.println("Arvauspeli! Arvaatko nimen oikein?\nKirjoita arvaus:");		
+		
+		do 	{answer = in.nextLine();				// arvauslooppi alkaa		
+			if(answer.equalsIgnoreCase(name)) {		// looppi loppuu jos arvataan oikein
+				System.out.println("Arvasit oikein!");
+				++i;
+				break;
+				}
+			else if(answer.equalsIgnoreCase(gameover)) { // looppi loppuu jos pelaaja niin haluaa
+				System.out.println("Peli on ohi ja elämä jatkuu!");
+				break;
+				}
+			else { // jatketaan vihjeitä ja arvauskertoja nimen loppuun asti jos ei muuta valita/tapahdu
+				if (i < 8) {
+					char v = name.charAt(i); // hakee nimestä vihjekirjaimen arvauskertojen perusteella
+					System.out.println("Ei mennyt vielä nappiin. Arvaa uudestaan!\nTai lopeta kirjoittamalla \"Loppu\" ja painamalla Enter");
+					System.out.println("Tässä avuksi vihje. Nimen " + (i+1) + ". kirjain on: ");
+					System.out.println(v);
+					}
+				}
+			++i;
+		} while(i < 9 ); // arvauslooppi käy kaikki kierrokset/vihjekirjaimet läpi ja loppuu
+		
+		System.out.println("Game over! Arvasit " + i + " kertaa"); // tulostetaan arvauskerrat ja pelin loppuminen
+	}
+}
+
+
+
+Muistipeli:
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Muistipeli {
+
+	public static void main(String[] args) {		
+		
+		Scanner in = new Scanner(System.in);
+		Random random = new Random();		
+				
+		int randomNumber1 = random.nextInt (5)+1;		// arvotaan satunnaiset numerot väliltä 1-5
+		int randomNumber2 = random.nextInt (5)+1;
+		int randomNumber3 = random.nextInt (5)+1;
+		int randomNumber4 = random.nextInt (5)+1;
+		int randomNumber5 = random.nextInt (5)+1;
+		int randomNumber6 = random.nextInt (5)+1;
+		int randomNumber7 = random.nextInt (5)+1;
+		
+		// laitetaan arvotut arrayhin
+		int[] realNumbers = {randomNumber1, randomNumber2, randomNumber3, randomNumber4, randomNumber5, randomNumber6, randomNumber7};	
+		
+		
+		// näytetään arvotut numerot pelaajalle
+		System.out.println("Yritä muistaa alla olevat numerot. Näet numerot 3 sekunnin ajan.");
+		System.out.println("Muistipelin numerot:\n" + randomNumber1 + " " +randomNumber2 + " " +randomNumber3 + " " +randomNumber4 + " " +randomNumber5 + " " +randomNumber6 + " " +randomNumber7 + " ");
+		
+		try
+		{
+		 // suoritus pysähtyy kolmeksi sekunniksi
+		 Thread.sleep(3000);
+		}
+		catch(InterruptedException ex)
+		{
+		 Thread.currentThread().interrupt();
+		}
+		
+		for (int i = 0; i < 20; ++i) System.out.println();
+		
+		// pelaaja syöttää/arvaa numerot
+		
+		System.out.println("Syötä 1. numero: ");
+		int playerNumber1 = in.nextInt();
+		
+		System.out.println("Syötä 2. numero: ");
+		int playerNumber2 = in.nextInt();
+		
+		System.out.println("Syötä 3. numero: ");
+		int playerNumber3 = in.nextInt();
+		
+		System.out.println("Syötä 4. numero: ");
+		int playerNumber4 = in.nextInt();
+		
+		System.out.println("Syötä 5. numero: ");
+		int playerNumber5 = in.nextInt();
+		
+		System.out.println("Syötä 6. numero: ");
+		int playerNumber6 = in.nextInt();
+		
+		System.out.println("Syötä 7. numero: ");
+		int playerNumber7 = in.nextInt();
+		
+		
+		// pelaajan arvaukset omaan arrayhin
+		int[] playersNumbers = {playerNumber1, playerNumber2, playerNumber3, playerNumber4, playerNumber5, playerNumber6, playerNumber7};
+		
+		
+		// muutetaan arrayt stringiksi ja näytetään pelaajalle
+		String realNstr = Arrays.toString(realNumbers);
+		String playerNstr = Arrays.toString(playersNumbers);
+		
+		System.out.println("Oikeat numerot olivat: ");
+		System.out.println(realNstr);
+		
+		System.out.println("Antamasi numerot olivat: ");
+		System.out.println(playerNstr);
+		
+		int pros = 0;
+		int error = 7;
+		
+		if (realNstr.equals(playerNstr)){ // tarkistetaan tuliko 7 oikein :)
+            System.out.println("\nMuistat varmaankin oman puhelinnumerosi ulkoa! Olet Muisti-Sensei!");
+            pros = pros + 100;           
+		}
+		
+		else if (!realNstr.equals(playerNstr)){  // tarkistetaan monta meni maaliin ja lisätään sen mukaan prosentteja ja vähennetään vääriä arvauksia
+            System.out.println("\nYritä arvata uudestaan. Et ihan päässyt maaliin. Ehkä seuraavalla kierroksella!");
+            if(randomNumber1 == playerNumber1) {
+				pros = pros + (100/7);
+				error--;
+				}
+            if(randomNumber2 == playerNumber2) {
+				pros = pros + (100/7);
+				error--;
+				}
+            if(randomNumber3 == playerNumber3) {
+				pros = pros + (100/7);
+				error--;
+				}
+            if(randomNumber4 == playerNumber4) {
+				pros = pros + (100/7);
+				error--;
+				}
+            if(randomNumber5 == playerNumber5) {
+				pros = pros + (100/7);
+				error--;
+				}
+            if(randomNumber6 == playerNumber6) {
+				pros = pros + (100/7);
+				error--;
+				}
+            if(randomNumber7 == playerNumber7) {
+				pros = pros + (100/7);
+				error--;
+				}
+            System.out.println("\nArvauksistasi meni " + error + " pieleen.");
+		}		
+		System.out.println("Onnistuit arvaamaan " + pros + "%" + " tarkkuudella.");
+	}
+}
+

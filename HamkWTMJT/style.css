@@ -1,0 +1,252 @@
+
+body {
+    background-color: #071722;
+    color: #dcdcdc;
+    font-family: 'Calistoga', cursive;
+    width: 80%;
+    margin: 25px auto;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Courgette', cursive;
+    font-size: 2.5em;
+    margin: 35px 0px;
+    color: #8c5656;    
+}
+
+main{
+  margin: 0 auto;
+}
+
+#mainpic {
+  display: block;
+  margin: 0 auto;  
+  width: 80%;
+}
+
+a:link {
+    color: whitesmoke;    
+}
+
+a:hover {
+    color: #8c5656;    
+}
+
+.intro{
+  text-align: center;
+  width: 100%;
+}
+
+.introtext{
+  text-align: left;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.opinionbox{  
+  padding-left: 2%;
+  padding-right: 2%;
+  margin:1% auto;
+  float:left;  
+  box-sizing: border-box;
+  text-align: left;
+  background-color: black;  
+}
+
+.plusandminus{
+  
+  padding-left: 2%;
+  padding-right: 2%;  
+  margin:1% auto;
+  float:left;  
+  box-sizing: border-box;
+  text-align: left;
+  background-color: black;
+}
+
+.ListPlus{
+  float:left;
+}
+  .ListPlus ul{    
+      list-style: none;
+      padding-inline-start: 5px;    
+  }
+
+  .ListPlus li:before {
+    content: "+";
+    margin-right: 4px;
+  }
+
+.ListMinus{
+  float:left;
+}
+  .ListMinus ul{    
+    list-style: none;
+    padding-inline-start: 5px;    
+  }
+
+  .ListMinus li:before {
+    content: "-";
+    margin-right: 4px;
+  }
+
+.galleryintro {
+  clear:left;
+}
+
+.picture {
+  float: left;
+  width: 20%;
+  padding: 10px;
+}
+  
+    /* Style the images inside the grid */
+    .picture img {
+      max-width: 100%;
+      opacity: 0.8;
+      cursor: pointer;
+  }
+    
+    .picture img:hover {
+      opacity: 1;
+  }
+  
+  /* Clear floats after the columns */
+  .gallery:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+  
+  /* The expanding image container (positioning is needed to position the close button and the text) */
+  .container {
+    position: relative;
+    display: none;
+}
+  
+  /* Expanding image text */
+  #imgtext {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: white;
+    font-size: 20px;
+}
+  
+  /* Closable button inside the image */
+  .closebtn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+footer{
+    background-color: black;
+    padding: 0.5%; 
+}
+
+/* Media queryssä käytetty apuna https://www.w3schools.com/css/css_rwd_mediaqueries.asp */
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+  .picture {
+    float: left;
+    width: 48%;
+    padding: 1%;
+  }
+
+  .opinionbox{
+    width:100%;
+    height:auto;
+    margin:1% auto;
+    margin-bottom: 0%;
+    float:left;
+  }
+  
+  .plusandminus{
+    width:100%;
+    height:auto;
+    margin:0% auto;
+    margin-bottom: 2%;
+    clear: left;    
+  }
+  
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+  .picture {
+    float: left;
+    width: 31.33%;
+    padding: 1%;
+  }
+
+  .opinionbox{
+    width:100%;
+    height:auto;
+    margin:1% auto;
+    margin-bottom: 0%;
+    float:left;
+  }
+  
+  .plusandminus{
+    width:100%;
+    height:auto;
+    margin:0% auto;
+    margin-bottom: 2%;
+    float: left;
+  }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+/*@media only screen and (min-width: 768px) {
+}*/
+
+/* Large devices (laptops/desktops, 992px and up) */
+/*@media only screen and (min-width: 992px) {
+}*/
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+  .opinionbox{
+    width:50%;
+    height:520px;
+    padding-left: 2%;
+    margin:1% auto;
+    float:left;
+  }
+  
+  .plusandminus{
+    width:50%;
+    height:520px;
+    margin:1% auto;
+    float:left;
+  }
+
+  .picture {
+    float: left;
+    width: 23%;
+    padding: 1%;
+  }
+  
+}
+
+/* Custom limit for layout purpose 1650px and up) */
+@media only screen and (min-width: 1650px) {
+  .opinionbox{
+    height:435px;
+  }
+
+  .plusandminus{
+    height:435px;
+  }
+
+}
