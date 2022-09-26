@@ -1630,11 +1630,13 @@ input, select, textarea {
 		.image img {
 			display: block;
 			width: 100%;
+			height: auto; /*MJT edit*/
 		}
 
 		.image.fit {
 			display: block;
 			width: 100%;
+			height: auto; /*MJT edit*/
 		}
 
 		.image.featured {
@@ -2193,6 +2195,10 @@ input, select, textarea {
 				margin: 0 0 4em 0;
 			}
 
+			h1 {
+				font-size: 3.00em;  /*MJT edit */
+			}
+
 		/* Wrappers */
 
 			.wrapper {
@@ -2210,6 +2216,8 @@ input, select, textarea {
 			#top {
 				padding: 8em 0;
 			}
+
+				
 
 				#top .image {
 					width: 24em;
